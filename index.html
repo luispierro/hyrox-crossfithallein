@@ -235,27 +235,6 @@
   .costume-badge .b1{ font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 1.5rem; display:block; }
   .costume-badge .b2{ font-size: 0.82rem; color: rgba(244,241,247,0.75); }
 
-  /* ---------- Track image ---------- */
-  .track-figure{
-    margin-top: 40px;
-    border: 1px solid rgba(126,168,176,0.35);
-    background: var(--ink-soft);
-    min-height: 320px;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-  .track-figure img{
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .track-placeholder{
-    text-align: center;
-    color: var(--paper-dim);
-    padding: 40px;
-    font-size: 0.95rem;
-  }
-  .track-placeholder strong{ display:block; color: var(--paper); margin-bottom: 6px; font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.02em;}
-
   /* ---------- Fee ---------- */
   .fee{
     display: grid;
@@ -357,8 +336,7 @@
 <header>
   <div class="wrap">
     <div class="brand">HYROX <span>HALLOWEEN</span> DUELL</div>
-    <!-- TODO(FORM_URL): replace # with the real external registration form link -->
-    <a class="btn btn-primary" href="#" id="nav-signup" target="_blank" rel="noopener">Anmelden</a>
+    <a class="btn btn-primary" href="https://forms.gle/LpCJFZX75zQmcxPR7" id="nav-signup" target="_blank" rel="noopener">Anmelden</a>
   </div>
 </header>
 
@@ -371,8 +349,7 @@
       <h1>HYROX<br>HALLOWEEN<br><em>DUELL</em></h1>
       <p class="sub">Zwei Athlet:innen, ein Parcours, ein Kostüm-Auftritt. Wir schnappen uns den Hyrox-Parcours für einen Abend voller Spaß, Schweiß und Verkleidungen &ndash; einfach, weil wir gerne zusammen feiern.</p>
       <div class="hero-ctas">
-        <!-- TODO(FORM_URL): replace # with the real external registration form link -->
-        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Team anmelden</a>
+        <a class="btn btn-primary" href="https://forms.gle/LpCJFZX75zQmcxPR7" target="_blank" rel="noopener">Team anmelden</a>
         <a class="btn btn-ghost" href="#details">Alle Infos</a>
       </div>
       <div class="hero-facts">
@@ -420,31 +397,6 @@
     </div>
   </section>
 
-  <!-- ============ TRACK IMAGE ============ -->
-  <section>
-    <div class="wrap">
-      <p class="kicker">Die Strecke</p>
-      <h2 class="sec-title">Das erwartet euch auf dem Parcours</h2>
-      <p>Ein Überblick über den Hyrox-Streckenaufbau für dieses Event &ndash; Stationen, Reihenfolge und Übergänge.</p>
-
-      <figure class="track-figure">
-        <!--
-          TODO(TRACK_IMG): replace "track-map.jpg" below with your real image
-          file name or URL. Until a real image is added, onerror swaps in a
-          simple placeholder so the page still looks intentional.
-        -->
-        <img src="track-map.jpg" alt="Streckenplan des Hyrox Halloween Duells"
-             onerror="this.replaceWith(document.getElementById('track-placeholder').content.cloneNode(true))">
-      </figure>
-      <template id="track-placeholder">
-        <div class="track-placeholder">
-          <strong>Streckenbild folgt</strong>
-          Hier wird das Bild mit dem Parcours-Verlauf eingefügt.
-        </div>
-      </template>
-    </div>
-  </section>
-
   <!-- ============ FEE ============ -->
   <section class="party">
     <div class="wrap fee">
@@ -472,14 +424,12 @@
     <div class="wrap">
       <p class="kicker">Alle Infos auf einen Blick</p>
       <h2 class="sec-title">Details</h2>
-      <!-- TODO(DETAILS): fill in date, time, location, box name, deadline, capacity -->
       <dl>
-        <dt>Datum</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Datum</dt><dd class="fill-me">Samstag 31.10.2026</dd>
         <dt>Uhrzeit</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
-        <dt>Ort</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
-        <dt>Box</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Ort</dt><dd class="fill-me">Crossfit Hallein - Kalkofenweg 4, 5400 Hallein</dd>
         <dt>Startgeld</dt><dd>15&nbsp;€ pro Team</dd>
-        <dt>Anmeldeschluss</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Anmeldeschluss</dt><dd class="fill-me">Solange wir noch Plätze frei haben</dd>
       </dl>
     </div>
   </section>
@@ -489,8 +439,7 @@
     <div class="wrap">
       <h2>Schnappt euch<br>ein Kostüm & eine<br>Partnerin oder<br>einen Partner.</h2>
       <p class="sub" style="text-align:center;">Plätze sind begrenzt &ndash; meldet euer Duo über das Formular an.</p>
-      <!-- TODO(FORM_URL): replace # with the real external registration form link -->
-      <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Zum Anmeldeformular</a>
+      <a class="btn btn-primary" href="https://forms.gle/LpCJFZX75zQmcxPR7" target="_blank" rel="noopener">Zum Anmeldeformular</a>
     </div>
   </section>
 
@@ -498,9 +447,8 @@
 
 <footer>
   <div class="wrap">
-    <span><!-- TODO(DETAILS): replace with your box name --> Ein Event von [Box-Name]</span>
-    <!-- TODO(SOCIAL): optional, add an Instagram/socials link here, or remove this line -->
-    <span><a href="#" target="_blank" rel="noopener">Instagram</a></span>
+    <span>Ein Event von Crossfit Hallein</span>
+    <span><a href="https://www.instagram.com/crossfit_hallein/" target="_blank" rel="noopener">Instagram</a></span>
   </div>
 </footer>
 
