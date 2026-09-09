@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<!--
+  HYROX HALLOWEEN DUO EVENT — single-page hotsite
+  ------------------------------------------------
+  Everything (HTML + CSS + JS) lives in this one file, as requested.
+  Page copy is in German; all code comments are in English so the
+  gym owner (or a future editor) can find things quickly.
+
+  THINGS YOU STILL NEED TO FILL IN — search for "TODO" in this file:
+    1. TODO(FORM_URL)   -> replace with the real external sign-up form link
+    2. TODO(TRACK_IMG)  -> replace with the actual track image file/URL
+    3. TODO(DETAILS)    -> date, time, address, box name, deadline, capacity
+    4. TODO(SOCIAL)     -> optional Instagram/socials link in the footer
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyrox Halloween Duell</title>
+<meta name="description" content="Hyrox Halloween Duell – ein Team-Event für unsere Box-Community. Duos, Kostüme und eine Party danach.">
+
+<!-- Google Fonts: Big Shoulders Display (headlines, industrial/race feel) + Space Grotesk (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Design tokens ---------- */
+  :root{
+    /* Box brand colors, exactly as given */
+    --purple:      #58348B;
+    --purple-2:    #55367C;
+    --teal:        #7EA8B0;
+
+    /* Derived shades (tints/darkens of the brand hues, for depth & contrast) */
+    --ink:         #170F22;   /* near-black purple, page background */
+    --ink-soft:    #241633;   /* slightly lighter panel background */
+    --paper:       #F4F1F7;   /* soft lavender-white, text on dark */
+    --paper-dim:   #C9BFDA;   /* muted lavender for secondary text */
+
+    --radius:      2px;
+    --max-w:       1080px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3{
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    line-height: 0.92;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  p{ margin: 0 0 1em 0; color: var(--paper-dim); max-width: 62ch; }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section{ position: relative; padding: 88px 0; }
+
+  /* Jagged section divider — a torn-paper / cracked-ground silhouette,
+     doubles as a race-track motif and a spooky "ripped" edge. */
+  .torn-bottom{
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 34px;
+    background: inherit;
+    clip-path: polygon(
+      0% 100%, 0% 30%, 4% 55%, 8% 20%, 13% 60%, 18% 10%, 23% 50%,
+      28% 25%, 33% 65%, 38% 15%, 43% 45%, 48% 5%, 53% 55%, 58% 20%,
+      63% 60%, 68% 30%, 73% 50%, 78% 10%, 83% 45%, 88% 20%, 93% 55%,
+      97% 15%, 100% 40%, 100% 100%
+    );
+  }
+
+  /* ---------- Header / nav ---------- */
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(23,15,34,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(126,168,176,0.25);
+  }
+  header .wrap{
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; padding-bottom: 14px;
+  }
+  .brand{
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  .brand span{ color: var(--teal); }
+  .btn{
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 26px;
+    border-radius: var(--radius);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary{
+    background: var(--teal);
+    color: var(--ink);
+  }
+  .btn-primary:hover{ transform: translateY(-2px); background: #8FBAC1; }
+  .btn-ghost{
+    border: 1px solid var(--paper-dim);
+    color: var(--paper);
+  }
+  .btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+  header .btn-primary{ padding: 9px 20px; font-size: 0.92rem; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 96px 0 120px;
+    background:
+      radial-gradient(ellipse 700px 420px at 78% -10%, rgba(126,168,176,0.22), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 5% 110%, rgba(88,52,139,0.55), transparent 65%),
+      var(--ink);
+    overflow: hidden;
+  }
+  .hero-tag{
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+  .hero h1{
+    font-size: clamp(3rem, 9vw, 6.4rem);
+    color: var(--paper);
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--teal);
+  }
+  .hero .sub{
+    margin-top: 22px;
+    font-size: 1.15rem;
+    color: var(--paper-dim);
+    max-width: 46ch;
+  }
+  .hero-ctas{ margin-top: 34px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-facts{
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 28px 44px;
+    max-width: 640px;
+  }
+  .hero-facts div{ border-left: 2px solid var(--teal); padding-left: 14px; }
+  .hero-facts .num{
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+    font-size: 1.7rem;
+    color: var(--paper);
+    display: block;
+  }
+  .hero-facts .lbl{ font-size: 0.85rem; color: var(--paper-dim); }
+
+  /* ---------- Generic section headings ---------- */
+  .kicker{
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .sec-title{
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    color: var(--paper);
+    margin-bottom: 22px;
+    max-width: 16ch;
+  }
+
+  /* ---------- Concept + Format (two-up) ---------- */
+  .concept{ background: var(--ink-soft); }
+  .grid-2{
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .format-list{ list-style: none; margin: 0; padding: 0; }
+  .format-list li{
+    padding: 18px 0;
+    border-top: 1px solid rgba(201,191,218,0.2);
+    display: flex; gap: 18px; align-items: baseline;
+  }
+  .format-list li:last-child{ border-bottom: 1px solid rgba(201,191,218,0.2); }
+  .format-list strong{
+    color: var(--paper); font-weight: 600; min-width: 130px; flex-shrink: 0;
+  }
+  .format-list p{ margin: 0; }
+
+  /* ---------- Costume callout ---------- */
+  .costume{
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-2) 100%);
+    border-radius: var(--radius);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .costume h3{ font-size: clamp(1.6rem, 3.4vw, 2.3rem); color: var(--paper); margin-bottom: 12px; }
+  .costume p{ color: rgba(244,241,247,0.85); }
+  .costume-badge{
+    border: 1px solid rgba(244,241,247,0.5);
+    padding: 16px 20px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .costume-badge .b1{ font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 1.5rem; display:block; }
+  .costume-badge .b2{ font-size: 0.82rem; color: rgba(244,241,247,0.75); }
+
+  /* ---------- Track image ---------- */
+  .track-figure{
+    margin-top: 40px;
+    border: 1px solid rgba(126,168,176,0.35);
+    background: var(--ink-soft);
+    min-height: 320px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .track-figure img{
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .track-placeholder{
+    text-align: center;
+    color: var(--paper-dim);
+    padding: 40px;
+    font-size: 0.95rem;
+  }
+  .track-placeholder strong{ display:block; color: var(--paper); margin-bottom: 6px; font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:1.2rem; letter-spacing:0.02em;}
+
+  /* ---------- Fee ---------- */
+  .fee{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .fee-price{
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: var(--teal);
+    line-height: 0.85;
+  }
+  .fee-price sup{ font-size: 0.35em; top: -1.4em; }
+  .fee-price small{ display:block; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size: 1rem; color: var(--paper-dim); margin-top: 8px; }
+
+  /* ---------- After party ---------- */
+  .party{ background: var(--ink-soft); }
+
+  /* ---------- Details table ---------- */
+  .details{
+    border-top: 1px solid rgba(201,191,218,0.2);
+  }
+  .details dl{
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    row-gap: 0;
+  }
+  .details dt, .details dd{
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(201,191,218,0.2);
+    margin: 0;
+  }
+  .details dt{ color: var(--teal); font-weight: 600; }
+  .details dd{ color: var(--paper); }
+  .fill-me{ color: var(--paper-dim); font-style: italic; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    text-align: center;
+    padding: 100px 0 120px;
+  }
+  .final-cta h2{
+    font-size: clamp(2.4rem, 7vw, 4.4rem);
+    color: var(--paper);
+    margin-bottom: 22px;
+  }
+  .final-cta .sub{ margin: 0 auto 34px; }
+
+  footer{
+    border-top: 1px solid rgba(126,168,176,0.25);
+    padding: 32px 0;
+  }
+  footer .wrap{
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    font-size: 0.85rem; color: var(--paper-dim);
+  }
+  footer a{ color: var(--paper-dim); text-decoration: underline; }
+  footer a:hover{ color: var(--teal); }
+
+  /* ---------- Focus visibility (accessibility) ---------- */
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .btn-primary:hover{ transform: none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px){
+    section{ padding: 64px 0; }
+    .hero{ padding: 64px 0 88px; }
+    .hero-facts{ grid-template-columns: 1fr 1fr; }
+    .grid-2{ grid-template-columns: 1fr; gap: 36px; }
+    .costume{ grid-template-columns: 1fr; padding: 32px; text-align: left; }
+    .costume-badge{ justify-self: start; }
+    .fee{ grid-template-columns: 1fr; gap: 12px; text-align: left; }
+    .details dl{ grid-template-columns: 1fr; }
+    .details dt{ padding-bottom: 4px; border-bottom: none; }
+    .details dd{ padding-top: 0; }
+    header .brand{ font-size: 1rem; }
+  }
+
+  @media (max-width: 420px){
+    .wrap{ padding: 0 18px; }
+    .hero-ctas{ flex-direction: column; align-items: stretch; }
+    .hero-ctas .btn{ text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">HYROX <span>HALLOWEEN</span> DUELL</div>
+    <!-- TODO(FORM_URL): replace # with the real external registration form link -->
+    <a class="btn btn-primary" href="#" id="nav-signup" target="_blank" rel="noopener">Anmelden</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-tag">Ein Community-Event unserer Box</div>
+      <h1>HYROX<br>HALLOWEEN<br><em>DUELL</em></h1>
+      <p class="sub">Zwei Athlet:innen, ein Parcours, ein Kostüm-Auftritt. Wir schnappen uns den Hyrox-Parcours für einen Abend voller Spaß, Schweiß und Verkleidungen &ndash; einfach, weil wir gerne zusammen feiern.</p>
+      <div class="hero-ctas">
+        <!-- TODO(FORM_URL): replace # with the real external registration form link -->
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Team anmelden</a>
+        <a class="btn btn-ghost" href="#details">Alle Infos</a>
+      </div>
+      <div class="hero-facts">
+        <div><span class="num">2er</span><span class="lbl">Teams, gemischt oder nicht</span></div>
+        <div><span class="num">15&nbsp;€</span><span class="lbl">Startgeld pro Team</span></div>
+        <div><span class="num">🎃</span><span class="lbl">Kostüme erwünscht</span></div>
+      </div>
+    </div>
+    <div class="torn-bottom" style="background: var(--ink);"></div>
+  </section>
+
+  <!-- ============ CONCEPT + FORMAT ============ -->
+  <section class="concept">
+    <div class="wrap grid-2">
+      <div>
+        <p class="kicker">Worum geht's</p>
+        <h2 class="sec-title">Spaß zuerst. Zeiten zweitrangig.</h2>
+        <p>Das Ziel dieses Events ist simpel: gemeinsam Spaß haben und einen weiteren Anlass schaffen, unsere Box-Community zusammenzubringen. Es geht nicht um Bestzeiten oder Wettkampfdruck, sondern darum, den Hyrox-Parcours zu zweit &ndash; und in Kostüm &ndash; zu meistern und danach gemeinsam zu feiern.</p>
+      </div>
+      <div>
+        <p class="kicker">Format</p>
+        <ul class="format-list">
+          <li><strong>Teamgröße</strong><p>Nur Duos. Ihr tretet gemeinsam an, jeder Teil des Parcours wird zu zweit bestritten.</p></li>
+          <li><strong>Zusammensetzung</strong><p>Gemischte Teams oder reine Männer-/Frauen-Teams &ndash; beides ist möglich.</p></li>
+          <li><strong>Niveau</strong><p>Für die ganze Box gedacht &ndash; von neugierig bis erfahren.</p></li>
+        </ul>
+      </div>
+    </div>
+    <div class="torn-bottom" style="background: var(--ink-soft);"></div>
+  </section>
+
+  <!-- ============ COSTUME CALLOUT ============ -->
+  <section>
+    <div class="wrap">
+      <div class="costume">
+        <div>
+          <h3>Kostüme sind erwünscht.<br>Partnerlook noch mehr.</h3>
+          <p>Es ist Halloween &ndash; also raus mit den Kostümen. Euer Duo darf einzeln gruseln oder als Paar auftreten. Zieht ihr als Team im Partnerlook los, gibt's dafür extra Anerkennung am Eventtag.</p>
+        </div>
+        <div class="costume-badge">
+          <span class="b1">Bonus</span>
+          <span class="b2">für Duos im Partnerlook</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACK IMAGE ============ -->
+  <section>
+    <div class="wrap">
+      <p class="kicker">Die Strecke</p>
+      <h2 class="sec-title">Das erwartet euch auf dem Parcours</h2>
+      <p>Ein Überblick über den Hyrox-Streckenaufbau für dieses Event &ndash; Stationen, Reihenfolge und Übergänge.</p>
+
+      <figure class="track-figure">
+        <!--
+          TODO(TRACK_IMG): replace "track-map.jpg" below with your real image
+          file name or URL. Until a real image is added, onerror swaps in a
+          simple placeholder so the page still looks intentional.
+        -->
+        <img src="track-map.jpg" alt="Streckenplan des Hyrox Halloween Duells"
+             onerror="this.replaceWith(document.getElementById('track-placeholder').content.cloneNode(true))">
+      </figure>
+      <template id="track-placeholder">
+        <div class="track-placeholder">
+          <strong>Streckenbild folgt</strong>
+          Hier wird das Bild mit dem Parcours-Verlauf eingefügt.
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- ============ FEE ============ -->
+  <section class="party">
+    <div class="wrap fee">
+      <div class="fee-price">15<sup>€</sup><small>pro Team</small></div>
+      <div>
+        <p class="kicker">Startgeld</p>
+        <h2 class="sec-title" style="margin-bottom:12px;">Zur Deckung der Eventkosten</h2>
+        <p>Die 15&nbsp;€ pro Duo helfen uns, Streckenaufbau, Deko und kleine Preise für das Event zu finanzieren. Bezahlt wird bei der Anmeldung bzw. am Eventtag &ndash; Details dazu folgen im Anmeldeformular.</p>
+      </div>
+    </div>
+    <div class="torn-bottom" style="background: var(--ink);"></div>
+  </section>
+
+  <!-- ============ AFTER PARTY ============ -->
+  <section>
+    <div class="wrap">
+      <p class="kicker">Danach</p>
+      <h2 class="sec-title">Die Party geht weiter</h2>
+      <p>Sobald der letzte Rep geschafft ist, feiern wir zusammen weiter &ndash; mit Musik, Drinks und guter Laune. Die beste Verkleidung, die schnellste Zeit oder einfach nur der gemeinsame Abend: Grund zum Feiern gibt's genug.</p>
+    </div>
+  </section>
+
+  <!-- ============ DETAILS ============ -->
+  <section id="details" class="details">
+    <div class="wrap">
+      <p class="kicker">Alle Infos auf einen Blick</p>
+      <h2 class="sec-title">Details</h2>
+      <!-- TODO(DETAILS): fill in date, time, location, box name, deadline, capacity -->
+      <dl>
+        <dt>Datum</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Uhrzeit</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Ort</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Box</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+        <dt>Startgeld</dt><dd>15&nbsp;€ pro Team</dd>
+        <dt>Anmeldeschluss</dt><dd class="fill-me">wird noch bekanntgegeben</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final-cta">
+    <div class="wrap">
+      <h2>Schnappt euch<br>ein Kostüm & eine<br>Partnerin oder<br>einen Partner.</h2>
+      <p class="sub" style="text-align:center;">Plätze sind begrenzt &ndash; meldet euer Duo über das Formular an.</p>
+      <!-- TODO(FORM_URL): replace # with the real external registration form link -->
+      <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Zum Anmeldeformular</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><!-- TODO(DETAILS): replace with your box name --> Ein Event von [Box-Name]</span>
+    <!-- TODO(SOCIAL): optional, add an Instagram/socials link here, or remove this line -->
+    <span><a href="#" target="_blank" rel="noopener">Instagram</a></span>
+  </div>
+</footer>
+
+<script>
+  // Keep the header sign-up button and the final CTA button pointed at the
+  // same form URL, so it only ever needs to be updated in one place.
+  // TODO(FORM_URL): put your real external registration form link here.
+  const REGISTRATION_FORM_URL = "#";
+
+  document.querySelectorAll('a.btn-primary[target="_blank"]').forEach((link) => {
+    link.href = REGISTRATION_FORM_URL;
+  });
+</script>
+
+</body>
+</html>
